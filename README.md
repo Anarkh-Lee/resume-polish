@@ -55,38 +55,25 @@ npm run dev
 点击页面右上角的设置图标，可以选择不同的 AI 服务提供商：
 
 1. **免费服务（默认）**
+
    - 内置服务，无需配置
    - 每台设备 50 次免费使用机会
    - 基于 SiliconFlow API
+2. **OpenAI**
 
-2. **Lovable AI**
-   - 内置服务，无需配置
-   - 开箱即用，无使用次数限制
-
-3. **OpenAI**
    - 需要填写 OpenAI API Key
    - 可选择指定模型（默认 gpt-4o-mini）
+3. **自定义 API**
 
-4. **自定义 API**
    - 支持任何兼容 OpenAI Chat Completions 格式的 API
    - 需填写 API URL、API Key 和模型名称
    - 示例：SiliconFlow、Azure OpenAI、DeepSeek 等
 
 ### 环境变量
 
-| 变量名 | 说明 | 默认值 |
-|--------|------|--------|
-| `VITE_HIDE_LOVABLE_AI` | 是否隐藏 Lovable AI 选项 | `false` |
-| `SILICONFLOW_API_KEY` | SiliconFlow API Key（后端） | - |
-
-**生产环境隐藏 Lovable AI**：
-
-如果你要将应用部署给他人使用，建议隐藏 Lovable AI 选项，避免消耗你的额度：
-
-```bash
-# .env.production
-VITE_HIDE_LOVABLE_AI=true
-```
+| 变量名                  | 说明                        | 默认值 |
+| ----------------------- | --------------------------- | ------ |
+| `SILICONFLOW_API_KEY` | SiliconFlow API Key（后端） | -      |
 
 ## 📖 使用指南
 
@@ -105,14 +92,15 @@ VITE_HIDE_LOVABLE_AI=true
 ## 📝 示例
 
 **输入**：
+
 > 我在项目中使用了 Redis 缓存。
 
 **输出**：
 
-| 版本 | 润色结果 |
-|------|----------|
-| 标准专业版 | 设计并实施 Redis 缓存策略，有效减轻数据库负载，提升系统整体响应效率。 |
-| 数据驱动版 | 引入 Redis 多级缓存架构，将核心接口 QPS 提升了 [X]%，平均响应时间从 [Y]ms 降低至 [Z]ms，显著优化用户体验。 |
+| 版本          | 润色结果                                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 标准专业版    | 设计并实施 Redis 缓存策略，有效减轻数据库负载，提升系统整体响应效率。                                                                       |
+| 数据驱动版    | 引入 Redis 多级缓存架构，将核心接口 QPS 提升了 [X]%，平均响应时间从 [Y]ms 降低至 [Z]ms，显著优化用户体验。                                  |
 | 专家/架构师版 | 主导高并发场景下的缓存架构升级，通过 Redis Cluster 解决缓存击穿、穿透与雪崩问题，设计热点数据预加载机制，成功支撑百万级日活用户的稳定访问。 |
 
 ## 🔧 自定义开发
@@ -143,6 +131,7 @@ supabase/
 ### 使用量限制
 
 免费服务的使用量限制可以在以下位置修改：
+
 - 后端：`supabase/functions/polish-resume/index.ts` 中的 `FREE_USAGE_LIMIT`
 - 前端：`src/components/SettingsDialog.tsx` 中的 `FREE_USAGE_LIMIT`
 
@@ -153,5 +142,5 @@ MIT License
 ---
 
 <p align="center">
-  Built for developers, by developers 🚀
+  Built for developers, by Anarkh-Lee 🚀
 </p>

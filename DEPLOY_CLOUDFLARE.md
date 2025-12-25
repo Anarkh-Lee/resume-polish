@@ -71,9 +71,14 @@ git push -u origin main
 |--------|-----|
 | **Project name** | `resume-polish`（或你喜欢的名称） |
 | **Production branch** | `main` |
-| **Framework preset** | `Vite` |
-| **Build command** | `npm run build` |
+| **Framework preset** | `None`（选择 None，不要选择 Vite） |
+| **Build command** | `npm install && npm run build` |
 | **Build output directory** | `dist` |
+
+> ⚠️ **重要**：
+> - **必须选择 `None`** 作为 Framework preset，不要选择 Vite
+> - **必须使用 `npm install && npm run build`** 作为构建命令
+> - 这是因为项目的 `bun.lockb` 文件可能与 Cloudflare 的 bun 版本不兼容
 
 ### 3.2 环境变量（重要！）
 
@@ -84,16 +89,10 @@ git push -u origin main
 | `VITE_SUPABASE_URL` | `https://<project-id>.supabase.co` | 你的 Supabase 项目 URL |
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | `eyJhbGciOi...` | 你的 Supabase Anon Key |
 | `VITE_SUPABASE_PROJECT_ID` | `<project-id>` | 你的 Supabase 项目 ID |
+| `NODE_VERSION` | `20` | 指定 Node.js 版本 |
+| SKIP_DEPENDENCY_INSTALL | true | 这样 Cloudflare 就不会自动运行 bun install，而是使用你指定的 npm install |
 
-> ⚠️ **注意**：这些是前端环境变量，必须以 `VITE_` 开头才能被 Vite 识别
-
-### 3.3 Node.js 版本
-
-添加环境变量来指定 Node.js 版本：
-
-| 变量名 | 值 |
-|--------|-----|
-| `NODE_VERSION` | `20` |
+> ⚠️ **注意**：前端环境变量必须以 `VITE_` 开头才能被 Vite 识别
 
 ---
 
@@ -239,6 +238,15 @@ git push
 ---
 
 ## 常见问题
+
+### Q: 构建失败，提示 "lockfile had changes, but lockfile is frozen"
+
+**原因：** 项目使用 `bun.lockb` 文件，但 Cloudflare 的 bun 版本可能不兼容
+
+**解决方法：**
+1. 确保 Framework preset 选择 **None**（不是 Vite）
+2. 确保构建命令是 `npm install && npm run build`
+3. 不要使用 `--frozen-lockfile` 选项
 
 ### Q: 构建失败，提示 "npm install failed"
 

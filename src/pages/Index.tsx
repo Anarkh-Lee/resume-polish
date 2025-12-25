@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Terminal, Zap, AlertCircle, Gift } from "lucide-react";
+import { Sparkles, Terminal, Zap, AlertCircle, Gift, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ResultCard } from "@/components/ResultCard";
 import { LoadingSkeleton } from "@/components/LoadingSkeleton";
@@ -127,6 +127,15 @@ export default function Index() {
                 </div>
               )}
               <SettingsDialog usageInfo={usageInfo} />
+              <a
+                href="https://github.com/Anarkh-Lee/resume-polish"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                title="View on GitHub"
+              >
+                <Github className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+              </a>
             </div>
           </div>
         </div>
@@ -252,7 +261,7 @@ export default function Index() {
       <footer className="border-t border-border/50 py-6 mt-auto">
         <div className="container max-w-4xl mx-auto px-4">
           <p className="text-center text-xs text-muted-foreground font-mono">
-            Built for developers, by developers 🚀
+            Built for developers, by Anarkh-Lee 🚀
           </p>
         </div>
       </footer>

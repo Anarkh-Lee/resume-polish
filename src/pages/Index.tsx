@@ -6,6 +6,7 @@ import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { SettingsDialog, getAISettings, getDeviceId, UsageInfo } from "@/components/SettingsDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { trackPolishRequest, trackCopyResult } from "@/utils/analytics";
 
 interface PolishedResult {
   standard: string;
@@ -43,6 +44,9 @@ export default function Index() {
     try {
       const settings = getAISettings();
       const deviceId = getDeviceId();
+      
+      // 追踪润色请求
+      trackPolishRequest(settings.provider);
       
       const { data, error: functionError } = await supabase.functions.invoke('polish-resume', {
         body: { 

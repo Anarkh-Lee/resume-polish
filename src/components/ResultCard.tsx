@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { trackCopyResult } from "@/utils/analytics";
 
 interface ResultCardProps {
   version: "A" | "B" | "C";
@@ -37,6 +38,7 @@ export function ResultCard({ version, title, subtitle, content, delay = 0 }: Res
     await navigator.clipboard.writeText(content);
     setCopied(true);
     toast.success("已复制到剪贴板");
+    trackCopyResult(`Version ${version}`);
     setTimeout(() => setCopied(false), 2000);
   };
 

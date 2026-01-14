@@ -28,6 +28,7 @@
 - **后端服务**：Supabase Edge Functions
 - **AI 服务**：支持多种 AI 提供商
 - **使用量追踪**：基于设备 ID 的使用量统计
+- **数据分析**：Google Analytics 4
 
 ## 🚀 快速开始
 
@@ -72,11 +73,46 @@ npm run dev
 
 ### 环境变量
 
-| 变量名                  | 说明                        | 默认值 |
-| ----------------------- | --------------------------- | ------ |
-| `SILICONFLOW_API_KEY` | SiliconFlow API Key（后端） | -      |
+| 变量名                     | 说明                          | 默认值 |
+| -------------------------- | ----------------------------- | ------ |
+| `SILICONFLOW_API_KEY`      | SiliconFlow API Key（后端）   | -      |
+| `VITE_GA_MEASUREMENT_ID`   | Google Analytics 4 衡量 ID    | -      |
 
-## 📖 使用指南
+## � 数据分析与追踪
+
+本项目已集成 **Google Analytics 4 (GA4)**，用于了解用户行为和优化产品体验。
+
+### 追踪的事件
+
+| 事件类别 | 事件动作            | 事件标签           | 说明                             |
+| -------- | ------------------- | ------------------ | -------------------------------- |
+| Resume   | Polish Request      | `free/openai/custom` | 用户发起润色请求，标签为 AI 提供商 |
+| Resume   | Copy Result         | `Version A/B/C`    | 用户复制润色结果，标签为版本类型 |
+| Settings | Open Dialog         | -                  | 用户打开设置对话框               |
+| Settings | Configure API       | `free/openai/custom` | 用户切换 AI 服务提供商           |
+| -        | pageview            | 页面路径           | 页面浏览事件                     |
+
+### GA4 配置步骤
+
+1. 前往 [Google Analytics](https://analytics.google.com/) 创建账号和 GA4 属性
+2. 获取衡量 ID（格式：`G-XXXXXXXXXX`）
+3. 在 `.env` 文件中添加：
+   ```env
+   VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+4. 重启开发服务器或重新部署
+
+### 隐私说明
+
+- 本项目仅收集匿名的使用行为数据
+- 不会追踪用户输入的具体简历内容
+- 所有数据用于改进产品体验
+
+如不希望被追踪，可以：
+- 不配置 `VITE_GA_MEASUREMENT_ID` 环境变量
+- 使用浏览器的隐私模式或广告拦截插件
+
+## �📖 使用指南
 
 1. 在输入框中输入你的工作描述（大白话即可）
 2. 点击「AI 智能润色」按钮

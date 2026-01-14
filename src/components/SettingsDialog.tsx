@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
+import { trackSettingsOpen, trackAPIConfig } from "@/utils/analytics";
 
 export type AIProvider = 'free' | 'openai' | 'custom';
 
@@ -92,7 +93,12 @@ export function SettingsDialog({ usageInfo }: SettingsDialogProps) {
   const isExhausted = usageInfo && usageInfo.remaining <= 0;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(isOpen) => {
+      setOpen(isOpen);
+      if (isOpen) {
+        trackSettingsOpen();
+      }
+    }}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" className="h-8 w-8 relative">
           <Settings className="h-4 w-4" />
@@ -143,7 +149,10 @@ export function SettingsDialog({ usageInfo }: SettingsDialogProps) {
 
           <RadioGroup
             value={settings.provider}
-            onValueChange={(v) => setSettings({ ...settings, provider: v as AIProvider })}
+            onValueChange={(v) => {
+              setSettings({ ...settings, provider: v as AIProvider });
+              trackAPIConfig(v);
+            }}
             className="space-y-3"
           >
             {/* 免费内置服务 */}

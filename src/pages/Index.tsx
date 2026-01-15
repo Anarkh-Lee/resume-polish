@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ResultCard } from "@/components/ResultCard";
 import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { SettingsDialog, getAISettings, getDeviceId, UsageInfo } from "@/components/SettingsDialog";
+import { BusuanziStats } from "@/components/BusuanziStats";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { trackPolishRequest, trackCopyResult } from "@/utils/analytics";
@@ -263,7 +264,8 @@ export default function Index() {
 
       {/* Footer */}
       <footer className="border-t border-border/50 py-6 mt-auto">
-        <div className="container max-w-4xl mx-auto px-4">
+        <div className="container max-w-4xl mx-auto px-4 space-y-3">
+          <BusuanziStats />
           <p className="text-center text-xs text-muted-foreground font-mono">
             Built for developers, by Anarkh-Lee 🚀
           </p>
